@@ -2,7 +2,7 @@
 Promise, Promise.all(), Promise.allSettled(), Promise.race(), Promise.any(), Promise.resolve(), Promise.reject()
 
 ## Quick Look
-```js
+```
 Promise.all => It execute Sequentialy and if all success then get success result else return first failed catch block
 Promise.allSettled => It execute Sequentialy and grab all response (resolve & reject both) with 'status' key ('fulfilled'/'rejected') 
 Promise.any => If any promise resolved, it will return that one instantly
