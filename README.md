@@ -225,3 +225,23 @@ Output will be like -
 }
 **/
 ```
+
+## Promise.all
+
+```js
+const getResult = Promise.all([fun1(), fun2(), fun3()]).then((successResult) => {
+  // get all resolve values in a array 
+  console.log(successResult);
+}).catch((anyError) => {
+  // get only 1 error which will come first  
+  console.log(anyError);
+});
+
+/**
+Note:
+It just like the above example with compress code structure
+If all promises are success then success result block will execute
+If any promise failed/reject then catch block will execute
+Catch block get only 1 error respect to which promise return failed/reject
+**/
+```
