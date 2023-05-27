@@ -1,6 +1,8 @@
 # Promise Notes
 Promise, Promise.all(), Promise.allSettled(), Promise.race(), Promise.any(), Promise.resolve(), Promise.reject()
 
+## Simple Promise - 
+
 ```js
 function fun1() {
   const promise = new Promise((resolve, reject) => {
