@@ -10,6 +10,7 @@ Promise.race => It return the first (based on execution time) promise execution 
 Promise.resolve => always return resolve/success and get the data within 'then' block
 Promise.reject => always return reject/error and get the data within 'catch' block
 ```
+<a href="https://github.com/dev-arindam-roy/js-async-await-promise-callback-facts">Check it also</a>
 
 ## Code Style
 ```js
