@@ -77,3 +77,24 @@ If i set isSuccess = false, then
 Access the passing objects in reject
 **/
 ```
+
+```js
+/** Full Code Like **/
+
+const getFun1 = fun1().then((resolveParam) => {
+  console.log(resolveParam.key2);
+}).catch((rejectParam) => {
+  console.log(rejectParam.error.message);
+  console.log(rejectParam.reason);
+});
+
+/**
+If isSuccess = true then
+After 6 sec, will print in console - "console :: function-1 resolve"
+and return "value-2"
+
+If isSuccess = false then
+After 6 sec, will print in console - "console :: function-1 reject"
+and return "error-message-1", "error-reject-1"
+**/
+```
