@@ -7,6 +7,43 @@ Promise.all => It execute Sequentialy and if all success then get success result
 Promise.allSettled => It execute Sequentialy and grab all response (resolve & reject both) with 'status' key ('fulfilled'/'rejected') 
 Promise.any => If any promise resolved, it will return that one instantly
 Promise.race => It return the first (based on execution time) promise execution (resolve or reject) instantly
+Promise.resolve => always return resolve/success and get the data within 'then' block
+Promise.reject => always return reject/error and get the data within 'catch' block
+```
+
+## Code Style
+```js
+function example() {
+    const myPromise = new Promise();
+    if (true) {
+      return myPromise.resolve({.......});
+    } else {
+      return myPromise.reject({.......});
+    }
+}
+```
+```js
+function example() {
+    const myPromise = new Promise((resolve, reject) => {
+      if (true) {
+        resolve({.........});
+      } else {
+        reject({.........});
+      }
+    });
+    return myPromise;
+}
+```
+```js
+function example() {
+    return new Promise((resolve, reject) => {
+      if (true) {
+        resolve({.........});
+      } else {
+        reject({.........});
+      }
+    });
+}
 ```
 
 ## Simple Promise - 
