@@ -314,7 +314,7 @@ Like: -
 **/
 ```
 
-Example - 2 with Promise.allSettled
+## Example - 2 with Promise.allSettled
 
 ```js
 /** 
