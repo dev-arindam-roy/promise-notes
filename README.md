@@ -280,3 +280,36 @@ getResult().then((success) => {
   console.log(error);
 });
 ```
+
+## Promise.allSettled
+
+```js
+const getResult = Promise.allSettled([fun1(), fun2(), fun3()]).then((successResponse) => {
+  console.log(successResponse);
+}).catch((errorResponse) => {
+  console.log(errorResponse);
+});
+
+/**
+Note:
+Promise.allSettled - it execute Sequentialy and grab all response (resolve & reject both)
+If any promise resolved then it will return an object with 'status: "fulfilled"' and get all resolve return values within an another key 'value'
+Like: - 
+[object Object] {
+status: "fulfilled",
+value: [object Object] {
+  key7: "value-7",
+  key8: "value-8",
+  key9: "value-9"
+}
+If any promise rejected then then it will return an object with 'status: "rejected"' and get all reject return values within an another key 'reason'
+Like: - 
+[object Object] {
+  reason: [object Object] {
+    error: [object Error] { ... },
+    reason: "error-reject-1"
+  },
+  status: "rejected"
+}
+**/
+```
