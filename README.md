@@ -98,3 +98,29 @@ After 6 sec, will print in console - "console :: function-1 reject"
 and return "error-message-1", "error-reject-1"
 **/
 ```
+```js
+/** You can write like this **/
+const getFun1 = async () => {
+  let getResult = await fun1().then((resolveParam) => console.log(resolveParam)).catch((rejectParam) => console.log(rejectParam));
+}
+/** call it **/
+getFun1();
+``
+
+```js
+/** You can write like this **/
+const getFun1 = async () => {
+  let getResult = await fun1().then((resolveParam) => {
+    return resolveParam;
+  }).catch((rejectParam) => {
+    return rejectParam;
+  });
+  return getResult;
+}
+
+/** 
+As getFun1() again return a promise so to extract result or value from it
+we are using then() function here 
+**/
+getFun1().then((result) => console.log(result));
+```
