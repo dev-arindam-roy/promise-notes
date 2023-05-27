@@ -242,7 +242,7 @@ Note:
 It just like the above example with compress code structure
 If all promises are success then success result block will execute
 If any promise failed/reject then catch block will execute
-Catch block get only 1 error respect to which promise return failed/reject
+Catch block get only 1 reject return error respect to which promise return failed/reject
 **/
 ```
 ## Example - 2 with Promise.all
@@ -349,5 +349,38 @@ getResult().then((success) => {
   // as per your project requirements
 }).catch((error) => {
   console.log(error);
+});
+```
+
+## Promise.any
+
+```js
+/**
+Note: -
+If any promise resolved, it will return that one instantly
+It will return 1 success resolve result, respect to which promise return resolve
+If all promises are failed/rejected then it will return a error message - "All promises were rejected"
+**/
+const getResult = Promise.any([fun1(), fun2(), fun3()]).then((successResponse) => {
+  console.log(successResponse);
+}).catch((errorResponse) => {
+  console.log(errorResponse.message);
+  // will return "All promises were rejected" if all are rejected
+});
+```
+
+## Promise.race
+
+```js
+/**
+Note: - 
+It return the first (based on execution time) promise execution instantly
+If execution get rejected then will return error/reject values and we will operate it in 'catch' block
+If execution get resolved then will return success/resolve values and we will operate it in 'then' block
+**/
+const getResult = Promise.race([fun1(), fun2(), fun3()]).then((successResponse) => {
+  console.log(successResponse);
+}).catch((errorResponse) => {
+  console.log(errorResponse.error.message);
 });
 ```
