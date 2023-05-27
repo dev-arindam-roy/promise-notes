@@ -313,3 +313,41 @@ Like: -
 }
 **/
 ```
+
+Example - 2 with Promise.allSettled
+
+```js
+/** 
+getResult is a function which is async and it returns a value that is - returnResult  
+returnResult is a collection of responses from fun1, fun2, fun3
+**/
+const getResult = async () => await Promise.allSettled([fun1(), fun2(), fun3()]).then((successResult) => {
+  // get all resolve values in a array
+  let returnResult = [];
+  if (successResult.length) {
+    returnResult.push({
+      fun1Resp: successResult[0],
+      fun2Resp: successResult[1],
+      fun3Resp: successResult[2]
+    });
+  }
+  return returnResult;
+}).catch((anyError) => {
+  // get only 1 error which will come first  
+  console.log(anyError);
+});
+
+/**
+Now, we call the function getResult() and evaluate the response.
+As its return value coming from a promise so we are using then & catch
+**/
+getResult().then((success) => {
+  console.log(success[0].fun1Resp.status); // "rejected"
+  console.log(success[0].fun2Resp.status); // "rejected"
+  console.log(success[0].fun3Resp.status); // "fulfilled"
+  // your array - object operation here
+  // as per your project requirements
+}).catch((error) => {
+  console.log(error);
+});
+```
