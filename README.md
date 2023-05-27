@@ -384,3 +384,37 @@ const getResult = Promise.race([fun1(), fun2(), fun3()]).then((successResponse) 
   console.log(errorResponse.error.message);
 });
 ```
+
+## Promise.resolve & Promise.reject
+
+```js
+function fun1() {
+  return Promise.resolve({key1:'value1', key2:'value2'});
+}
+
+function fun2() {
+  return Promise.reject({error: new Error('error-message'), key1:'value1', key2:'value2'});
+}
+
+console.log(fun1()); // [object Promise] { ... }
+
+/** As fun1 only return resolve so we can use only then block **/
+fun1().then((resolveParam) => console.log(resolveParam));
+/**
+[object Object] {
+  key1: "value1",
+  key2: "value2"
+}
+**/
+
+/** As fun2 only return reject so we can use only catch block **/
+fun2().catch((rejectParam) => console.log(rejectParam, rejectParam.error.message));
+/**
+[object Object] {
+  error: [object Error] { ... },
+  key1: "value1",
+  key2: "value2"
+}
+"error-message"
+**/
+```
