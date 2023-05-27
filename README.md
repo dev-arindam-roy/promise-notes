@@ -11,7 +11,7 @@ function fun1() {
         resolve({key1: 'value-1', key2: 'value-2', key3: 'value-3'});
       } else {
         console.log('console :: function-1 reject');
-        reject({error: new Error('error-message-from-function1'), reason: 'error-reject-1'});
+        reject({error: new Error('error-message-1'), reason: 'error-reject-1'});
       }
     }, 6000);
   });
@@ -51,5 +51,29 @@ and return the reject like -
   error: [object Error] { ... },
   reason: "error-reject-1"
 }
+**/
+```
+```js
+const getFun1 = fun1().then((resolveParam) => {
+  console.log(resolveParam.key1);
+  console.log(resolveParam.key2);
+  console.log(resolveParam.key3);
+});
+/**
+Note:
+Access the passing objects in resolve
+**/
+```
+```js
+const getFun1 = fun1().catch((rejectParam) => {
+  if (rejectParam.error && rejectParam.error !== undefined) {
+    console.log(rejectParam.error.message); // get error object message
+  }
+  console.log(rejectParam.reason);
+});
+/**
+Note:
+If i set isSuccess = false, then
+Access the passing objects in reject
 **/
 ```
