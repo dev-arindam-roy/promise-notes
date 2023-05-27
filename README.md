@@ -126,3 +126,102 @@ we are using then() function here
 **/
 getFun1().then((result) => console.log(result));
 ```
+## Example - 1 (Sequential Calls)
+
+```js
+let executionTime = 0;
+
+function fun1() {
+  let executionTime = 0;
+  setInterval(() => { executionTime++ }, 1000);
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let isSuccess = true;
+      if (isSuccess) {
+        console.log('console :: function-1 resolve At - ' + executionTime + ' sec');
+        resolve({key1: 'value-1', key2: 'value-2', key3: 'value-3'});
+      } else {
+        console.log('console :: function-1 reject');
+        reject({error: new Error('error-message-1'), reason: 'error-reject-1'});
+      }
+    }, 6000);
+  });
+  return promise;
+}
+
+function fun2() {
+  setInterval(() => { executionTime++ }, 1000);
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let isSuccess = true;
+      if (isSuccess) {
+        console.log('console :: function-2 resolve At - ' + executionTime + ' sec');
+        resolve({key4: 'value-4', key5: 'value-5', key6: 'value-6'});
+      } else {
+        console.log('console :: function-2 reject');
+        reject({error: new Error('error-message-2'), reason: 'error-reject-2'});
+      }
+    }, 4000);
+  });
+  return promise;
+}
+
+function fun3() {
+  setInterval(() => { executionTime++ }, 1000);
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let isSuccess = true;
+      if (isSuccess) {
+        console.log('console :: function-3 resolve At - ' + executionTime + ' sec');
+        resolve({key7: 'value-7', key8: 'value-8', key9: 'value-9'});
+      } else {
+        console.log('console :: function-3 reject');
+        reject({error: new Error('error-message-3'), reason: 'error-reject-3'});
+      }
+    }, 2000);
+  });
+  return promise;
+}
+
+fun1().then(async (resolve1) => {
+  await fun2().then(async (resolve2) => {
+    await fun3().then((resolve3) => {
+      console.log(resolve1);
+      console.log(resolve2);
+      console.log(resolve3);
+    }).catch((reject3) => {
+      console.log(reject3);
+    });
+  }).catch((reject2) => {
+    console.log(reject2);
+  });
+}).catch((reject1) => {
+  console.log(reject1);
+});
+
+/**
+Note:
+If any promise return failed/reject then we will get error from catch block from that promise
+If any promise failed/reject, will get error
+If all promises are success then we will get below output.
+Output will be like - 
+"console :: function-1 resolve At - 6 sec"
+"console :: function-2 resolve At - 2 sec"
+"console :: function-3 resolve At - 4 sec"
+[object Object] {
+  key1: "value-1",
+  key2: "value-2",
+  key3: "value-3"
+}
+[object Object] {
+  key4: "value-4",
+  key5: "value-5",
+  key6: "value-6"
+}
+[object Object] {
+  key7: "value-7",
+  key8: "value-8",
+  key9: "value-9"
+}
+**/
+```
